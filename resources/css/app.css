@@ -1,0 +1,2318 @@
+/* Google Fonts are loaded non-blocking in layouts/app.blade.php via media=print trick */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   STS SMART TECH SYSTEMS — Professional Design System v2.0
+   Identity: Tech Blue / Dark Navy with Clean White content
+   Enhanced UI/UX with micro-animations & premium polish
+   ============================================================ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  
+  body {
+    @apply bg-white text-surface-800 antialiased;
+    font-family: 'Cairo', 'Outfit', sans-serif;
+  }
+
+  [dir="ltr"] body {
+    font-family: 'Outfit', 'Inter', sans-serif;
+  }
+
+  ::selection {
+    @apply bg-brand-500 text-white;
+  }
+
+  /* Improved focus styles for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-500;
+  }
+
+  /* Smooth page transitions */
+  img, video {
+    @apply transition-opacity duration-300;
+  }
+
+  img[loading="lazy"] {
+    opacity: 0;
+  }
+  img[loading="lazy"].loaded,
+  img[loading="lazy"][complete] {
+    opacity: 1;
+  }
+}
+
+@layer components {
+
+  /* ======================== CARD SYSTEM ======================== */
+
+  /* Premium light card — clean white with refined shadow and hover */
+  .card-light {
+    @apply bg-white rounded-2xl border border-surface-200/60;
+    box-shadow: 
+      0 1px 2px rgba(0, 0, 0, 0.03),
+      0 4px 16px -2px rgba(0, 0, 0, 0.06);
+    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-light:hover {
+    @apply border-brand-300/60;
+    box-shadow: 
+      0 8px 30px -6px rgba(10, 63, 110, 0.12),
+      0 2px 8px -1px rgba(0, 0, 0, 0.04);
+    transform: translateY(-6px);
+  }
+
+  /* Dark tech card for dark sections — STS Logo Midnight */
+  .card-dark {
+    @apply rounded-2xl border border-white/10;
+    background: rgba(1, 3, 24, 0.88);
+    backdrop-filter: blur(20px);
+    box-shadow: 
+      0 4px 20px -4px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-dark:hover {
+    border-color: rgba(12, 141, 231, 0.35);
+    box-shadow: 
+      0 12px 40px -8px rgba(12, 141, 231, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transform: translateY(-4px);
+  }
+
+  /* Frosted glass for light backgrounds */
+  .glass-light {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  /* Frosted glass for dark backgrounds — STS Logo Midnight */
+  .glass-dark {
+    background: rgba(1, 3, 24, 0.75);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* ======================== IMAGE STS LOGO BACKGROUND THEME (نفس لون خلفية الشعار) ======================== */
+  .img-slate-gray-container,
+  .bg-slate-gray-image,
+  .img-logo-bg {
+    background: linear-gradient(180deg, #000418 0%, #010318 50%, #040822 100%) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .img-slate-gray-overlay,
+  .img-logo-overlay {
+    background: linear-gradient(to top, #010318 0%, rgba(1, 3, 24, 0.75) 45%, transparent 100%) !important;
+  }
+
+  /* Gradient text for accent headings */
+  .text-gradient-brand {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 via-brand-500 to-accent-sky;
+  }
+
+  /* Badge component */
+  .badge-brand {
+    @apply inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase;
+    @apply bg-brand-50 text-brand-700 border border-brand-200/80;
+  }
+
+  /* ======================== SECTION BACKGROUNDS ======================== */
+
+  .section-light {
+    @apply bg-surface-50/80;
+  }
+  .section-white {
+    @apply bg-white;
+  }
+  .section-dark {
+    background: linear-gradient(180deg, #000418 0%, #010318 50%, #040822 100%);
+    @apply text-white;
+  }
+
+  /* ======================== BUTTON SYSTEM ======================== */
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold text-white rounded-xl;
+    background: linear-gradient(135deg, #0c6db5 0%, #0c8de7 50%, #0ea5e9 100%);
+    box-shadow: 
+      0 4px 14px -2px rgba(12, 109, 181, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    @apply hover:scale-[1.03] active:scale-[0.97];
+    @apply transition-all duration-300;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.6s ease;
+  }
+  .btn-primary:hover::before {
+    left: 100%;
+  }
+  .btn-primary:hover {
+    box-shadow: 
+      0 8px 24px -4px rgba(12, 109, 181, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold rounded-xl;
+    @apply text-surface-700 bg-white border border-surface-200/80;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    @apply hover:border-brand-300 hover:text-brand-600 hover:bg-brand-50/30;
+    @apply transition-all duration-300;
+  }
+  .btn-secondary:hover {
+    box-shadow: 0 4px 12px -2px rgba(12, 141, 231, 0.1);
+    transform: translateY(-1px);
+  }
+
+  /* Ghost button for dark backgrounds */
+  .btn-ghost-dark {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold rounded-xl;
+    @apply text-white bg-white/8 border border-white/15 backdrop-blur-md;
+    @apply hover:bg-white/15 hover:border-white/30;
+    @apply transition-all duration-300;
+  }
+
+  /* ======================== NAVIGATION ======================== */
+
+  .nav-dark {
+    background: linear-gradient(180deg, rgba(19, 22, 25, 0.97) 0%, rgba(19, 22, 25, 0.92) 100%);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .nav-dark-scrolled {
+    background: rgba(19, 22, 25, 0.98);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(12, 141, 231, 0.15);
+    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ======================== FORM INPUTS ======================== */
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl bg-surface-50/80 border border-surface-200 text-surface-900 placeholder-surface-400 text-sm;
+    @apply focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10;
+    @apply transition-all duration-200;
+  }
+
+  .input-field-dark {
+    @apply w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-surface-400 text-sm;
+    @apply focus:outline-none focus:bg-white/10 focus:border-brand-400 focus:ring-4 focus:ring-brand-400/15;
+    @apply transition-all duration-200;
+  }
+
+  /* ======================== SCROLL PROGRESS BAR ======================== */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0c8de7, #0ea5e9, #0c6db5);
+    z-index: 9999;
+    transition: width 0.1s linear;
+    border-radius: 0 2px 2px 0;
+    box-shadow: 0 0 10px rgba(12, 141, 231, 0.5);
+  }
+
+  /* ======================== SCROLL TO TOP BUTTON ======================== */
+  .scroll-top-btn {
+    @apply fixed z-40 p-3 rounded-2xl text-white transition-all duration-300;
+    bottom: 6rem;
+    right: 1.25rem;
+    background: linear-gradient(135deg, #0c6db5, #0c8de7);
+    box-shadow: 0 4px 16px -4px rgba(12, 109, 181, 0.5);
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+    pointer-events: none;
+  }
+  [dir="rtl"] .scroll-top-btn {
+    right: auto;
+    left: 1.25rem;
+  }
+  .scroll-top-btn.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+  .scroll-top-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 24px -4px rgba(12, 109, 181, 0.6);
+  }
+  .scroll-top-btn:active {
+    transform: translateY(0) scale(0.95);
+  }
+
+
+
+  /* ======================== WHATSAPP FLOATING BUTTON ======================== */
+  .whatsapp-float {
+    @apply fixed z-40 transition-all duration-300;
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+  [dir="rtl"] .whatsapp-float {
+    right: auto;
+    left: 1.25rem;
+  }
+  .whatsapp-float a {
+    @apply flex items-center justify-center w-14 h-14 rounded-full text-white shadow-lg;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    box-shadow: 0 4px 20px -4px rgba(37, 211, 102, 0.5);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .whatsapp-float a:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 8px 30px -4px rgba(37, 211, 102, 0.6);
+  }
+  .whatsapp-float a:active {
+    transform: scale(0.95);
+  }
+  /* Pulse ring effect */
+  .whatsapp-float::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(37, 211, 102, 0.4);
+    animation: whatsapp-ring 2.5s ease-in-out infinite;
+  }
+
+  /* ======================== FLASH MESSAGE ALERTS ======================== */
+  .flash-alert {
+    @apply p-4 rounded-2xl flex items-center gap-3 shadow-soft;
+    animation: flashSlideDown 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .flash-alert-success {
+    @apply bg-emerald-50 border border-emerald-200 text-emerald-800;
+    background: linear-gradient(135deg, rgba(236, 253, 245, 0.9), rgba(209, 250, 229, 0.6));
+  }
+  .flash-alert-error {
+    @apply bg-rose-50 border border-rose-200 text-rose-800;
+    background: linear-gradient(135deg, rgba(255, 241, 242, 0.9), rgba(254, 205, 211, 0.6));
+  }
+
+  /* ======================== PAGE HERO OVERLAY (for inner pages) ======================== */
+  .page-hero {
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, #000418 0%, #010318 40%, #040822 75%, #071538 100%);
+    min-height: 280px;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 50% 80% at 70% 20%, rgba(12, 141, 231, 0.15), transparent),
+      radial-gradient(ellipse 40% 60% at 30% 80%, rgba(14, 165, 233, 0.1), transparent);
+    pointer-events: none;
+  }
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(12, 141, 231, 0.4), transparent);
+  }
+}
+
+@layer utilities {
+  /* Subtle grid pattern for light backgrounds */
+  .bg-grid-light {
+    background-size: 48px 48px;
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
+  }
+
+  /* Tech grid pattern for dark backgrounds */
+  .bg-grid-dark {
+    background-size: 60px 60px;
+    background-image: 
+      linear-gradient(to right, rgba(12, 141, 231, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(12, 141, 231, 0.06) 1px, transparent 1px);
+  }
+
+  /* Dots pattern */
+  .bg-dots-light {
+    background-image: radial-gradient(rgba(12, 141, 231, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Gradient mesh background */
+  .bg-mesh {
+    background-image: 
+      radial-gradient(at 40% 20%, rgba(12, 141, 231, 0.06) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(99, 102, 241, 0.04) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, rgba(14, 165, 233, 0.04) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, rgba(20, 184, 166, 0.03) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(12, 141, 231, 0.04) 0px, transparent 50%);
+  }
+
+  /* Dark mesh for dark sections */
+  .bg-mesh-dark {
+    background-image: 
+      radial-gradient(at 30% 20%, rgba(12, 141, 231, 0.15) 0px, transparent 50%),
+      radial-gradient(at 70% 80%, rgba(14, 165, 233, 0.1) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(26, 30, 36, 0.3) 0px, transparent 70%);
+  }
+
+  /* Hero gradient background (STS Logo Midnight) */
+  .bg-hero-gradient {
+    background: linear-gradient(135deg, #000418 0%, #010318 35%, #040822 70%, #000418 100%);
+  }
+
+  /* Section divider glow line */
+  .section-glow-line {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent, rgba(12, 141, 231, 0.4), transparent);
+  }
+
+  /* Hide scrollbar for clean touch horizontal sliders */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* ======================== SCROLL REVEAL & PROGRESSIVE ANIMATION ENGINE ======================== */
+  
+  /* Base state: Default elements are 100% visible for progressive enhancement (No-JS / SSR / Print) */
+  .reveal,
+  .reveal-up,
+  .reveal-down,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale,
+  .reveal-fade,
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* When JS is active and user does not prefer reduced motion: activate concealed state */
+  html.js-reveal-active:not(.reduced-motion) .reveal,
+  html.js-reveal-active:not(.reduced-motion) .reveal-up,
+  html.js-reveal-active:not(.reduced-motion) [data-reveal="up"] {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  html.js-reveal-active:not(.reduced-motion) .reveal-down,
+  html.js-reveal-active:not(.reduced-motion) [data-reveal="down"] {
+    opacity: 0;
+    transform: translateY(-28px);
+  }
+
+  html.js-reveal-active:not(.reduced-motion) .reveal-left,
+  html.js-reveal-active:not(.reduced-motion) [data-reveal="left"] {
+    opacity: 0;
+    transform: translateX(-36px);
+  }
+  [dir="rtl"] html.js-reveal-active:not(.reduced-motion) .reveal-left,
+  [dir="rtl"] html.js-reveal-active:not(.reduced-motion) [data-reveal="left"] {
+    transform: translateX(36px);
+  }
+
+  html.js-reveal-active:not(.reduced-motion) .reveal-right,
+  html.js-reveal-active:not(.reduced-motion) [data-reveal="right"] {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+  [dir="rtl"] html.js-reveal-active:not(.reduced-motion) .reveal-right,
+  [dir="rtl"] html.js-reveal-active:not(.reduced-motion) [data-reveal="right"] {
+    transform: translateX(-36px);
+  }
+
+  html.js-reveal-active:not(.reduced-motion) .reveal-scale,
+  html.js-reveal-active:not(.reduced-motion) [data-reveal="scale"] {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  html.js-reveal-active:not(.reduced-motion) .reveal-fade,
+  html.js-reveal-active:not(.reduced-motion) [data-reveal="fade"] {
+    opacity: 0;
+    transform: none;
+  }
+
+  /* Revealed state: triggered smoothly when scrolling into view */
+  .reveal.revealed,
+  .reveal-up.revealed,
+  .reveal-down.revealed,
+  .reveal-left.revealed,
+  .reveal-right.revealed,
+  .reveal-scale.revealed,
+  .reveal-fade.revealed,
+  [data-reveal].revealed {
+    opacity: 1 !important;
+    transform: translate(0, 0) scale(1) !important;
+  }
+
+  /* Stagger Delays for Cards & Grids */
+  .reveal-delay-1 { transition-delay: 75ms; }
+  .reveal-delay-2 { transition-delay: 150ms; }
+  .reveal-delay-3 { transition-delay: 225ms; }
+  .reveal-delay-4 { transition-delay: 300ms; }
+  .reveal-delay-5 { transition-delay: 375ms; }
+  .reveal-delay-6 { transition-delay: 450ms; }
+  .reveal-delay-7 { transition-delay: 525ms; }
+  .reveal-delay-8 { transition-delay: 600ms; }
+
+  /* ======================== LAZY IMAGE SMOOTH LOAD & BLUR-UP ======================== */
+  img.img-lazy-transition {
+    opacity: 0;
+    filter: blur(6px);
+    transform: scale(1.03);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), 
+                filter 0.65s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  img.img-lazy-transition.loaded,
+  img.img-priority-loaded,
+  .reduced-motion img.img-lazy-transition {
+    opacity: 1 !important;
+    filter: blur(0) !important;
+    transform: scale(1) !important;
+  }
+
+  /* Shimmer placeholder on image containers while image is downloading */
+  .img-skeleton-holder {
+    position: relative;
+    overflow: hidden;
+  }
+  .img-skeleton-holder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0) 0%, 
+      rgba(255, 255, 255, 0.04) 50%, 
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer-sweep 2s infinite ease-in-out;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+  }
+  .img-skeleton-holder.img-loaded::before {
+    opacity: 0;
+  }
+
+  /* ======================== MICRO HOVER LIFTS & GLOWS ======================== */
+  .hover-lift {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+  }
+  @media (hover: hover) {
+    .hover-lift:hover {
+      transform: translateY(-5px);
+    }
+  }
+
+  /* Accessibility: Prefers Reduced Motion & Print override */
+  @media (prefers-reduced-motion: reduce), print {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .reveal,
+    .reveal-up,
+    .reveal-down,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale,
+    .reveal-fade,
+    [data-reveal],
+    img.img-lazy-transition {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+  }
+
+  /* Text gradient underline hover effect */
+  .hover-underline-brand {
+    position: relative;
+  }
+  .hover-underline-brand::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #0c8de7, #0ea5e9);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+  [dir="rtl"] .hover-underline-brand::after {
+    left: auto;
+    right: 0;
+  }
+  .hover-underline-brand:hover::after {
+    width: 100%;
+  }
+}
+
+/* ======================== SCROLLBAR — Dark Tech Theme ======================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #131619;
+}
+::-webkit-scrollbar-thumb {
+  background: #353b45;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0c8de7;
+}
+
+/* ======================== ALPINE CLOAK ======================== */
+[x-cloak] {
+  display: none !important;
+}
+
+/* ======================== INFINITE MARQUEE ANIMATIONS ======================== */
+@keyframes infinite-loop-ltr {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes infinite-loop-rtl {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(50%, 0, 0); }
+}
+
+.infinite-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: infinite-loop-ltr 38s linear infinite;
+}
+
+[dir="rtl"] .infinite-marquee-track {
+  animation: infinite-loop-rtl 38s linear infinite;
+}
+
+.infinite-marquee-track.track-reverse {
+  animation-direction: reverse;
+}
+
+.infinite-marquee-track:hover,
+.infinite-marquee-track:focus-within,
+.infinite-marquee-track.is-paused {
+  animation-play-state: paused !important;
+}
+
+/* Gradient Mask for Smooth Fade Edges on Infinite Loop Containers */
+.marquee-fade-edges {
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+@media (max-width: 640px) {
+  .infinite-marquee-track {
+    animation-duration: 28s;
+  }
+  .marquee-fade-edges {
+    mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+  }
+}
+
+/* ======================== KEYFRAME ANIMATIONS ======================== */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes whatsapp-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+@keyframes flashSlideDown {
+  0% { opacity: 0; transform: translateY(-16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes counter-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes typing-dots {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+.typing-dot {
+  animation: typing-dots 1.4s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* ======================== LOADING SKELETON SHIMMER ======================== */
+@keyframes shimmer-sweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, 
+    rgba(0,0,0,0.04) 25%, 
+    rgba(0,0,0,0.08) 50%, 
+    rgba(0,0,0,0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-sweep 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* ======================== TOOLTIP ======================== */
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #131619;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 50;
+}
+[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-8px);
+}
+
+/* ======================== NUMBER COUNTER ANIMATION ======================== */
+.counter-animate {
+  animation: counter-up 0.6s ease-out forwards;
+}
+
+/* ======================== IMAGE HOVER ZOOM ======================== */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.img-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* ======================== RESPONSIVE ADJUSTMENTS ======================== */
+@media (max-width: 640px) {
+  .page-hero {
+    min-height: 220px;
+  }
+  .scroll-top-btn {
+    bottom: 5rem;
+    right: 0.75rem;
+  }
+  [dir="rtl"] .scroll-top-btn {
+    right: auto;
+    left: 0.75rem;
+  }
+  .whatsapp-float {
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+  [dir="rtl"] .whatsapp-float {
+    right: auto;
+    left: 0.75rem;
+  }
+}
+
+/* ======================== PRINT STYLES ======================== */
+@media print {
+  .nav-dark, .nav-dark-scrolled, footer, .scroll-top-btn, .whatsapp-float, .scroll-progress {
+    display: none !important;
+  }
+  body {
+    font-size: 12pt;
+    color: #000;
+  }
+  .card-light, .card-dark {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}
+
+/* ============================================================
+   ADMIN COMMAND CENTER — DARK LUXURY THEME
+   Unified Glassmorphism & Cyber-Tech styling for Admin Portal
+   ============================================================ */
+
+.admin-theme-dark {
+  background-color: #0d0f12 !important;
+  color: #f8fafc !important;
+}
+
+/* Card & Surface Containers — Luxury Frosted Glassmorphism with Refraction */
+.admin-theme-dark .card-light,
+.admin-theme-dark .card-dark,
+.admin-theme-dark .bg-white,
+.admin-theme-dark .bg-surface-900,
+.admin-theme-dark .bg-surface-950,
+.admin-theme-dark .bg-surface-900\/90,
+.admin-theme-dark .bg-surface-900\/95,
+.admin-theme-dark .bg-surface-950\/85,
+.admin-theme-dark .bg-surface-950\/90,
+.admin-theme-dark .bg-surface-950\/95,
+.admin-theme-dark .admin-card-executive,
+.admin-theme-dark .admin-glass-panel {
+  background: linear-gradient(135deg, rgba(23, 26, 31, 0.58) 0%, rgba(13, 15, 18, 0.72) 100%) !important;
+  backdrop-filter: blur(24px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #f8fafc;
+  box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.42), inset 0 1px 1px 0 rgba(255, 255, 255, 0.16), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.3) !important;
+  border-radius: 1rem;
+}
+
+.admin-theme-dark .card-light:hover,
+.admin-theme-dark .card-dark:hover,
+.admin-theme-dark .admin-card-executive:hover,
+.admin-theme-dark .hover\:border-brand-500\/40:hover {
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  background: linear-gradient(135deg, rgba(26, 30, 36, 0.68) 0%, rgba(16, 19, 23, 0.80) 100%) !important;
+  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.52), 0 0 25px -3px rgba(12, 141, 231, 0.35), inset 0 1px 2px 0 rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-2px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* High-Contrast Icon Pods in Dark Mode — Gemstone Radiance */
+.admin-theme-dark .bg-brand-500\/15 {
+  background-color: rgba(12, 141, 231, 0.16) !important;
+  border-color: rgba(12, 141, 231, 0.35) !important;
+  color: #38bdf8 !important;
+  box-shadow: 0 0 18px -2px rgba(12, 141, 231, 0.25) !important;
+}
+
+.admin-theme-dark .bg-amber-500\/15,
+.admin-theme-dark .bg-amber-500\/20,
+.admin-theme-dark .bg-amber-500\/25 {
+  background-color: rgba(245, 158, 11, 0.16) !important;
+  border-color: rgba(245, 158, 11, 0.4) !important;
+  color: #fcd34d !important;
+  box-shadow: 0 0 18px -2px rgba(245, 158, 11, 0.25) !important;
+}
+
+.admin-theme-dark .bg-emerald-500\/15,
+.admin-theme-dark .bg-emerald-500\/20 {
+  background-color: rgba(16, 185, 129, 0.16) !important;
+  border-color: rgba(16, 185, 129, 0.35) !important;
+  color: #6ee7b7 !important;
+  box-shadow: 0 0 18px -2px rgba(16, 185, 129, 0.25) !important;
+}
+
+.admin-theme-dark .bg-rose-500\/15,
+.admin-theme-dark .bg-rose-500\/20 {
+  background-color: rgba(244, 63, 94, 0.16) !important;
+  border-color: rgba(244, 63, 94, 0.35) !important;
+  color: #fda4af !important;
+  box-shadow: 0 0 18px -2px rgba(244, 63, 94, 0.25) !important;
+}
+
+/* Primary Headings & Bold Text — 100% Crisp White */
+.admin-theme-dark h1,
+.admin-theme-dark h2,
+.admin-theme-dark h3,
+.admin-theme-dark h4,
+.admin-theme-dark h5,
+.admin-theme-dark h6,
+.admin-theme-dark .text-surface-900,
+.admin-theme-dark .text-surface-800,
+.admin-theme-dark .text-gray-900,
+.admin-theme-dark .text-gray-800,
+.admin-theme-dark .text-slate-900,
+.admin-theme-dark .text-slate-800 {
+  color: #ffffff !important;
+}
+
+/* Secondary & Body Text — Clear Cool Slate */
+.admin-theme-dark .text-surface-700,
+.admin-theme-dark .text-surface-600,
+.admin-theme-dark .text-gray-700,
+.admin-theme-dark .text-gray-600,
+.admin-theme-dark .text-slate-700,
+.admin-theme-dark .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+/* Muted Meta & Footnotes — Readable Muted Silver */
+.admin-theme-dark .text-surface-500,
+.admin-theme-dark .text-surface-400,
+.admin-theme-dark .text-gray-500,
+.admin-theme-dark .text-gray-400,
+.admin-theme-dark .text-slate-500,
+.admin-theme-dark .text-slate-400 {
+  color: #94a3b8 !important;
+}
+
+/* Neutral Backgrounds & Sub-panels — Frosted Secondary Glass */
+.admin-theme-dark .bg-surface-50,
+.admin-theme-dark .bg-surface-100,
+.admin-theme-dark .bg-gray-50,
+.admin-theme-dark .bg-gray-100,
+.admin-theme-dark .bg-slate-50,
+.admin-theme-dark .bg-slate-100 {
+  background-color: rgba(9, 17, 34, 0.48) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.admin-theme-dark .border-surface-100,
+.admin-theme-dark .border-surface-200,
+.admin-theme-dark .border-gray-100,
+.admin-theme-dark .border-gray-200,
+.admin-theme-dark .border-slate-100,
+.admin-theme-dark .border-slate-200 {
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+
+/* Status Badges & Accents — Vivid High-Contrast Indicators */
+/* Brand / Cyan / Primary */
+.admin-theme-dark .text-brand-600 {
+  color: #38bdf8 !important;
+}
+.admin-theme-dark .bg-brand-50,
+.admin-theme-dark .bg-brand-100 {
+  background-color: rgba(12, 141, 231, 0.16) !important;
+  border-color: rgba(12, 141, 231, 0.35) !important;
+  box-shadow: 0 0 16px -3px rgba(12, 141, 231, 0.2) !important;
+}
+.admin-theme-dark .border-brand-100,
+.admin-theme-dark .border-brand-200 {
+  border-color: rgba(12, 141, 231, 0.35) !important;
+}
+
+/* Amber / Warning / Pending */
+.admin-theme-dark .text-amber-800,
+.admin-theme-dark .text-amber-700,
+.admin-theme-dark .text-amber-600,
+.admin-theme-dark .text-amber-900 {
+  color: #fcd34d !important;
+}
+.admin-theme-dark .bg-amber-50,
+.admin-theme-dark .bg-amber-100 {
+  background-color: rgba(245, 158, 11, 0.16) !important;
+  border-color: rgba(245, 158, 11, 0.35) !important;
+  box-shadow: 0 0 16px -3px rgba(245, 158, 11, 0.2) !important;
+}
+.admin-theme-dark .border-amber-100,
+.admin-theme-dark .border-amber-200 {
+  border-color: rgba(245, 158, 11, 0.35) !important;
+}
+
+/* Emerald / Success / Completed */
+.admin-theme-dark .text-emerald-800,
+.admin-theme-dark .text-emerald-700,
+.admin-theme-dark .text-emerald-600,
+.admin-theme-dark .text-emerald-900 {
+  color: #6ee7b7 !important;
+}
+.admin-theme-dark .bg-emerald-50,
+.admin-theme-dark .bg-emerald-100 {
+  background-color: rgba(16, 185, 129, 0.16) !important;
+  border-color: rgba(16, 185, 129, 0.35) !important;
+  box-shadow: 0 0 16px -3px rgba(16, 185, 129, 0.2) !important;
+}
+.admin-theme-dark .border-emerald-100,
+.admin-theme-dark .border-emerald-200 {
+  border-color: rgba(16, 185, 129, 0.35) !important;
+}
+
+/* Sky & Blue / Info / Under Review */
+.admin-theme-dark .text-sky-800,
+.admin-theme-dark .text-sky-700,
+.admin-theme-dark .text-sky-600,
+.admin-theme-dark .text-sky-900,
+.admin-theme-dark .text-blue-800,
+.admin-theme-dark .text-blue-700,
+.admin-theme-dark .text-blue-600 {
+  color: #7dd3fc !important;
+}
+.admin-theme-dark .bg-sky-50,
+.admin-theme-dark .bg-sky-100,
+.admin-theme-dark .bg-blue-50,
+.admin-theme-dark .bg-blue-100 {
+  background-color: rgba(14, 165, 233, 0.16) !important;
+  border-color: rgba(14, 165, 233, 0.35) !important;
+  box-shadow: 0 0 16px -3px rgba(14, 165, 233, 0.2) !important;
+}
+.admin-theme-dark .border-sky-100,
+.admin-theme-dark .border-sky-200 {
+  border-color: rgba(14, 165, 233, 0.35) !important;
+}
+
+/* Rose & Red / Cancelled / Urgent */
+.admin-theme-dark .text-rose-800,
+.admin-theme-dark .text-rose-700,
+.admin-theme-dark .text-rose-600,
+.admin-theme-dark .text-rose-900,
+.admin-theme-dark .text-red-800,
+.admin-theme-dark .text-red-700,
+.admin-theme-dark .text-red-600 {
+  color: #fda4af !important;
+}
+.admin-theme-dark .bg-rose-50,
+.admin-theme-dark .bg-rose-100,
+.admin-theme-dark .bg-red-50,
+.admin-theme-dark .bg-red-100 {
+  background-color: rgba(244, 63, 94, 0.16) !important;
+  border-color: rgba(244, 63, 94, 0.35) !important;
+  box-shadow: 0 0 16px -3px rgba(244, 63, 94, 0.2) !important;
+}
+.admin-theme-dark .border-rose-100,
+.admin-theme-dark .border-rose-200,
+.admin-theme-dark .border-red-100,
+.admin-theme-dark .border-red-200 {
+  border-color: rgba(244, 63, 94, 0.35) !important;
+}
+
+/* Indigo & Purple */
+.admin-theme-dark .text-indigo-800,
+.admin-theme-dark .text-indigo-700,
+.admin-theme-dark .text-indigo-600,
+.admin-theme-dark .text-indigo-900,
+.admin-theme-dark .text-purple-800,
+.admin-theme-dark .text-purple-700,
+.admin-theme-dark .text-purple-600,
+.admin-theme-dark .text-purple-900 {
+  color: #c084fc !important;
+}
+.admin-theme-dark .bg-indigo-50,
+.admin-theme-dark .bg-indigo-100,
+.admin-theme-dark .bg-purple-50,
+.admin-theme-dark .bg-purple-100 {
+  background-color: rgba(168, 85, 247, 0.16) !important;
+  border-color: rgba(168, 85, 247, 0.35) !important;
+  box-shadow: 0 0 16px -3px rgba(168, 85, 247, 0.2) !important;
+}
+.admin-theme-dark .border-indigo-100,
+.admin-theme-dark .border-indigo-200,
+.admin-theme-dark .border-purple-100,
+.admin-theme-dark .border-purple-200 {
+  border-color: rgba(168, 85, 247, 0.35) !important;
+}
+
+/* Form Controls & Text Inputs — Frosted Glass Inputs */
+.admin-theme-dark input[type="text"],
+.admin-theme-dark input[type="email"],
+.admin-theme-dark input[type="password"],
+.admin-theme-dark input[type="number"],
+.admin-theme-dark input[type="search"],
+.admin-theme-dark select,
+.admin-theme-dark textarea {
+  background-color: rgba(7, 14, 28, 0.52) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
+  border-radius: 0.75rem;
+}
+
+.admin-theme-dark input::placeholder,
+.admin-theme-dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+.admin-theme-dark input:focus,
+.admin-theme-dark select:focus,
+.admin-theme-dark textarea:focus {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25), inset 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  background-color: rgba(10, 20, 38, 0.75) !important;
+  outline: none !important;
+}
+
+/* Frosted Glass Data Tables */
+.admin-theme-dark table thead {
+  background-color: rgba(11, 20, 38, 0.65) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  color: #cbd5e1 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.admin-theme-dark table thead th {
+  color: #e2e8f0 !important;
+  font-weight: 700 !important;
+}
+
+.admin-theme-dark table tbody tr {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  transition: all 0.15s ease;
+}
+
+.admin-theme-dark table tbody tr:hover {
+  background-color: rgba(12, 141, 231, 0.12) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.admin-theme-dark table tbody td {
+  color: #e2e8f0;
+}
+
+/* ============================================================
+   ADMIN COMMAND CENTER — LIGHT / DAY MODE THEME
+   Clean, Professional White-Blue palette for daytime use
+   ============================================================ */
+
+/* Base: White background, dark text */
+.admin-theme-light {
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+}
+
+/* Executive Ambient Canvas System for Optimal Text & Icon Contrast */
+.admin-theme-dark .admin-dark-canvas,
+.admin-theme-dark .admin-dark-bg {
+  display: block !important;
+}
+.admin-theme-dark .admin-light-canvas,
+.admin-theme-dark .admin-light-bg {
+  display: none !important;
+}
+.admin-theme-light .admin-dark-canvas,
+.admin-theme-light .admin-dark-bg {
+  display: none !important;
+}
+.admin-theme-light .admin-light-canvas,
+.admin-theme-light .admin-light-bg {
+  display: block !important;
+}
+
+/* Precision Architectural Dot-Matrix Canvas Grids */
+.admin-grid-matrix {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 30%, black 40%, transparent 95%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 30%, black 40%, transparent 95%);
+}
+
+.admin-grid-matrix-light {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 30%, black 40%, transparent 95%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 30%, black 40%, transparent 95%);
+}
+
+/* Sidebar — Frosted Crystal Glass */
+.admin-theme-light .admin-sidebar {
+  background-color: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-color: rgba(226, 232, 240, 0.85) !important;
+  box-shadow: 4px 0 24px -2px rgba(15, 23, 42, 0.05) !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-brand-title {
+  color: #0f172a !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-brand-subtitle {
+  color: #0c6db5 !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-nav-link {
+  color: #475569 !important;
+  border-color: transparent !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-nav-link:hover {
+  color: #0c6db5 !important;
+  background-color: rgba(240, 249, 255, 0.75) !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-nav-link.active {
+  background-color: rgba(239, 246, 255, 0.85) !important;
+  color: #0c6db5 !important;
+  border-color: #bfdbfe !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-nav-icon {
+  color: #94a3b8 !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-nav-link.active .sidebar-nav-icon {
+  color: #0c8de7 !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-badge {
+  background-color: rgba(254, 243, 199, 0.85) !important;
+  color: #92400e !important;
+  border-color: #fde68a !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-user-card {
+  background-color: rgba(248, 250, 252, 0.75) !important;
+  backdrop-filter: blur(12px) !important;
+  border-color: rgba(226, 232, 240, 0.85) !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-user-name {
+  color: #0f172a !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-user-email {
+  color: #64748b !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-divider {
+  border-color: #e2e8f0 !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-logout-btn {
+  background-color: rgba(254, 242, 242, 0.8) !important;
+  border-color: #fecaca !important;
+  color: #dc2626 !important;
+}
+
+.admin-theme-light .admin-sidebar .sidebar-logout-btn:hover {
+  background-color: #fee2e2 !important;
+}
+
+/* Top Header Bar — Frosted Glass */
+.admin-theme-light .admin-top-header {
+  background-color: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85) !important;
+  box-shadow: 0 4px 20px 0 rgba(15, 23, 42, 0.04) !important;
+}
+
+.admin-theme-light .admin-top-header .header-title {
+  color: #0f172a !important;
+}
+
+.admin-theme-light .admin-top-header .header-action-btn {
+  background-color: rgba(248, 250, 252, 0.75) !important;
+  border-color: rgba(226, 232, 240, 0.85) !important;
+  color: #475569 !important;
+}
+
+.admin-theme-light .admin-top-header .header-action-btn:hover {
+  color: #0c6db5 !important;
+  border-color: #93c5fd !important;
+  background-color: #eff6ff !important;
+}
+
+/* Card & Surface Containers — Frosted Crystal Glass */
+.admin-theme-light .card-light,
+.admin-theme-light .card-dark,
+.admin-theme-light .bg-white,
+.admin-theme-light .admin-card-executive,
+.admin-theme-light .admin-glass-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(248, 250, 252, 0.65) 100%) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  color: #1e293b !important;
+  box-shadow: 0 10px 30px 0 rgba(15, 23, 42, 0.06), inset 0 1px 1px 0 rgba(255, 255, 255, 0.95) !important;
+  border-radius: 1rem;
+}
+
+.admin-theme-light .card-light:hover,
+.admin-theme-light .card-dark:hover,
+.admin-theme-light .admin-card-executive:hover {
+  border-color: rgba(12, 141, 231, 0.45) !important;
+  box-shadow: 0 14px 35px 0 rgba(12, 141, 231, 0.12), inset 0 1px 2px rgba(255, 255, 255, 1) !important;
+  transform: translateY(-2px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Text Hierarchy */
+.admin-theme-light h1,
+.admin-theme-light h2,
+.admin-theme-light h3,
+.admin-theme-light h4,
+.admin-theme-light h5,
+.admin-theme-light h6 {
+  color: #0f172a !important;
+}
+
+.admin-theme-light .text-white {
+  color: #0f172a !important;
+}
+
+.admin-theme-light .text-slate-100,
+.admin-theme-light .text-slate-200 {
+  color: #334155 !important;
+}
+
+.admin-theme-light .text-slate-300 {
+  color: #475569 !important;
+}
+
+.admin-theme-light .text-slate-400 {
+  color: #64748b !important;
+}
+
+.admin-theme-light .text-surface-900,
+.admin-theme-light .text-surface-800 {
+  color: #0f172a !important;
+}
+
+.admin-theme-light .text-surface-700,
+.admin-theme-light .text-surface-600 {
+  color: #334155 !important;
+}
+
+.admin-theme-light .text-surface-500,
+.admin-theme-light .text-surface-400 {
+  color: #64748b !important;
+}
+
+.admin-theme-light .text-surface-300,
+.admin-theme-light .text-surface-200 {
+  color: #475569 !important;
+}
+
+/* Brand text in light mode should be brand-600 not brand-300/400 */
+.admin-theme-light .text-brand-300,
+.admin-theme-light .text-brand-400 {
+  color: #0c6db5 !important;
+}
+
+.admin-theme-light .text-brand-200 {
+  color: #0c8de7 !important;
+}
+
+/* Backgrounds — Frosted Crystal */
+.admin-theme-light .bg-surface-900,
+.admin-theme-light .bg-surface-950 {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+.admin-theme-light .bg-surface-900\/90,
+.admin-theme-light .bg-surface-900\/95,
+.admin-theme-light .bg-surface-900\/80,
+.admin-theme-light .bg-surface-900\/70 {
+  background-color: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+.admin-theme-light .bg-surface-950\/80,
+.admin-theme-light .bg-surface-950\/85,
+.admin-theme-light .bg-surface-950\/95 {
+  background-color: rgba(255, 255, 255, 0.68) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+.admin-theme-light .bg-surface-50,
+.admin-theme-light .bg-surface-100 {
+  background-color: rgba(248, 250, 252, 0.68) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* Borders */
+.admin-theme-light .border-white\/10,
+.admin-theme-light .border-white\/15,
+.admin-theme-light .border-white\/20 {
+  border-color: #e2e8f0 !important;
+}
+
+.admin-theme-light .border-surface-100,
+.admin-theme-light .border-surface-200 {
+  border-color: #e2e8f0 !important;
+}
+
+.admin-theme-light .border-brand-500\/30,
+.admin-theme-light .border-brand-500\/40 {
+  border-color: #93c5fd !important;
+}
+
+/* Status Badge Colors — retain vibrancy in light mode */
+.admin-theme-light .text-amber-200,
+.admin-theme-light .text-amber-300 {
+  color: #d97706 !important;
+}
+
+.admin-theme-light .text-emerald-300,
+.admin-theme-light .text-emerald-400 {
+  color: #059669 !important;
+}
+
+.admin-theme-light .bg-amber-500\/10,
+.admin-theme-light .bg-amber-500\/15 {
+  background-color: #fffbeb !important;
+}
+
+.admin-theme-light .border-amber-500\/30,
+.admin-theme-light .border-amber-500\/40,
+.admin-theme-light .border-amber-500\/60 {
+  border-color: #fde68a !important;
+}
+
+.admin-theme-light .bg-brand-500\/15,
+.admin-theme-light .bg-brand-500\/25 {
+  background-color: #eff6ff !important;
+}
+
+.admin-theme-light .bg-emerald-500\/15 {
+  background-color: #ecfdf5 !important;
+}
+
+.admin-theme-light .border-emerald-500\/30 {
+  border-color: #a7f3d0 !important;
+}
+
+/* Brand glow shadows — softer in light mode */
+.admin-theme-light .shadow-brand-glow,
+.admin-theme-light .shadow-brand-glow\/15,
+.admin-theme-light .shadow-brand-glow\/20,
+.admin-theme-light .shadow-brand-glow\/30 {
+  box-shadow: 0 4px 14px -3px rgba(12, 141, 231, 0.15) !important;
+}
+
+/* White/5 and White/8 backgrounds → light gray */
+.admin-theme-light .bg-white\/5,
+.admin-theme-light .bg-white\/8,
+.admin-theme-light .bg-white\/10 {
+  background-color: #f1f5f9 !important;
+}
+
+.admin-theme-light .bg-white\/5:hover,
+.admin-theme-light .bg-white\/8:hover,
+.admin-theme-light .bg-white\/10:hover,
+.admin-theme-light .hover\:bg-white\/10:hover,
+.admin-theme-light .hover\:bg-white\/15:hover {
+  background-color: #e2e8f0 !important;
+}
+
+/* Form Controls — Frosted Crystal Inputs */
+.admin-theme-light input[type="text"],
+.admin-theme-light input[type="email"],
+.admin-theme-light input[type="password"],
+.admin-theme-light input[type="number"],
+.admin-theme-light input[type="search"],
+.admin-theme-light select,
+.admin-theme-light textarea {
+  background-color: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(226, 232, 240, 0.85) !important;
+  color: #0f172a !important;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  border-radius: 0.75rem;
+}
+
+.admin-theme-light input::placeholder,
+.admin-theme-light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.admin-theme-light input:focus,
+.admin-theme-light select:focus,
+.admin-theme-light textarea:focus {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15), inset 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  outline: none !important;
+}
+
+/* Data Tables — Frosted Crystal Glass */
+.admin-theme-light table thead {
+  background-color: rgba(248, 250, 252, 0.72) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85) !important;
+}
+
+.admin-theme-light table thead th {
+  color: #475569 !important;
+  font-weight: 700 !important;
+}
+
+.admin-theme-light table tbody tr {
+  border-color: rgba(241, 245, 249, 0.85) !important;
+  transition: all 0.15s ease;
+}
+
+.admin-theme-light table tbody tr:hover {
+  background-color: rgba(240, 249, 255, 0.72) !important;
+}
+
+.admin-theme-light table tbody td {
+  color: #334155;
+}
+
+/* Flash messages in light mode */
+.admin-theme-light .bg-emerald-500\/15 {
+  background-color: #ecfdf5 !important;
+  border-color: #a7f3d0 !important;
+}
+
+.admin-theme-light .text-emerald-200 {
+  color: #059669 !important;
+}
+
+.admin-theme-light .bg-rose-500\/15 {
+  background-color: #fef2f2 !important;
+  border-color: #fecaca !important;
+}
+
+.admin-theme-light .text-rose-200,
+.admin-theme-light .text-rose-300 {
+  color: #dc2626 !important;
+}
+
+/* Theme toggle button animation */
+.admin-theme-toggle {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  border-radius: 14px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  flex-shrink: 0;
+}
+
+.admin-theme-toggle .toggle-track {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  transition: background-color 0.4s ease;
+}
+
+.admin-theme-dark .admin-theme-toggle .toggle-track {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.admin-theme-light .admin-theme-toggle .toggle-track {
+  background: linear-gradient(135deg, #bfdbfe, #93c5fd);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.admin-theme-toggle .toggle-thumb {
+  position: absolute;
+  top: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease, box-shadow 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-theme-dark .admin-theme-toggle .toggle-thumb {
+  transform: translateX(26px);
+  background: linear-gradient(135deg, #312e81, #6366f1);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+}
+
+[dir="rtl"] .admin-theme-dark .admin-theme-toggle .toggle-thumb {
+  transform: translateX(-26px);
+}
+
+.admin-theme-light .admin-theme-toggle .toggle-thumb {
+  transform: translateX(4px);
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+}
+
+[dir="rtl"] .admin-theme-light .admin-theme-toggle .toggle-thumb {
+  transform: translateX(-4px);
+}
+
+.admin-theme-toggle .toggle-icon {
+  width: 14px;
+  height: 14px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* ============================================================
+   PUBLIC WEBSITE — DAY & NIGHT (LIGHT / DARK) THEME SYSTEM
+   Ultra-luxurious, High-Contrast UI/UX for all frontend pages
+   ============================================================ */
+
+/* ----------------- BASE & CANVAS ----------------- */
+.theme-light {
+  background-color: #f8fafc !important;
+  color: #1e293b !important;
+}
+
+/* ----------------- HEADER & NAVIGATION ----------------- */
+.theme-light header.nav-dark,
+.theme-light header.nav-dark-scrolled {
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 25px -4px rgba(0, 0, 0, 0.05) !important;
+}
+
+.theme-light header .text-white {
+  color: #0f172a !important;
+}
+
+.theme-light header nav a {
+  color: #475569 !important;
+}
+
+.theme-light header nav a:hover {
+  color: #0c6db5 !important;
+  background-color: #f1f5f9 !important;
+}
+
+.theme-light header nav a.bg-white\/10 {
+  background-color: #eff6ff !important;
+  color: #0c6db5 !important;
+  border-color: #bfdbfe !important;
+}
+
+.theme-light .header-lang-btn,
+.theme-light .header-theme-btn {
+  color: #334155 !important;
+  border-color: #e2e8f0 !important;
+  background-color: #f8fafc !important;
+}
+
+.theme-light .header-lang-btn:hover,
+.theme-light .header-theme-btn:hover {
+  background-color: #eff6ff !important;
+  border-color: #93c5fd !important;
+  color: #0c6db5 !important;
+}
+
+.theme-light header button[aria-label="Toggle menu"] {
+  color: #334155 !important;
+}
+
+.theme-light header button[aria-label="Toggle menu"]:hover {
+  background-color: #f1f5f9 !important;
+  color: #0c6db5 !important;
+}
+
+/* Mobile Drawer Menu in Light Mode */
+.theme-light .lg\:hidden.glass-dark {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.1) !important;
+}
+
+.theme-light .lg\:hidden.glass-dark a {
+  color: #334155 !important;
+}
+
+.theme-light .lg\:hidden.glass-dark a:hover {
+  background-color: #f1f5f9 !important;
+  color: #0c6db5 !important;
+}
+
+.theme-light .lg\:hidden.glass-dark a.bg-brand-500\/15 {
+  background-color: #eff6ff !important;
+  color: #0c6db5 !important;
+  border-color: #bfdbfe !important;
+}
+
+.theme-light .mobile-theme-container button {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+  color: #334155 !important;
+}
+
+/* ----------------- CARDS & CONTAINERS ----------------- */
+.theme-light .card-dark,
+.theme-light .glass-dark,
+.theme-light .card-light {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #1e293b !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.theme-light .card-dark:hover,
+.theme-light .glass-dark:hover,
+.theme-light .card-light:hover {
+  border-color: #93c5fd !important;
+  box-shadow: 0 12px 35px -6px rgba(12, 141, 231, 0.15) !important;
+  transform: translateY(-4px);
+}
+
+/* ----------------- SECTIONS & SURFACES ----------------- */
+.theme-light .bg-surface-950,
+.theme-light .bg-surface-900,
+.theme-light .bg-navy-950,
+.theme-light .bg-navy-900 {
+  background-color: #f8fafc !important;
+}
+
+.theme-light .bg-surface-950\/90,
+.theme-light .bg-surface-950\/80,
+.theme-light .bg-surface-900\/90,
+.theme-light .bg-surface-900\/80 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.theme-light .section-dark {
+  background: #f1f5f9 !important;
+  color: #1e293b !important;
+}
+
+.theme-light .section-light {
+  background-color: #ffffff !important;
+}
+
+.theme-light .bg-white\/5,
+.theme-light .bg-white\/8,
+.theme-light .bg-white\/10 {
+  background-color: #f1f5f9 !important;
+}
+
+.theme-light .bg-white\/5:hover,
+.theme-light .bg-white\/8:hover,
+.theme-light .bg-white\/10:hover,
+.theme-light .hover\:bg-white\/5:hover,
+.theme-light .hover\:bg-white\/8:hover,
+.theme-light .hover\:bg-white\/10:hover {
+  background-color: #e2e8f0 !important;
+}
+
+.theme-light .border-white\/5,
+.theme-light .border-white\/10,
+.theme-light .border-white\/15,
+.theme-light .border-white\/20 {
+  border-color: #e2e8f0 !important;
+}
+
+/* ----------------- TYPOGRAPHY & TEXT CONTRAST ----------------- */
+.theme-light h2,
+.theme-light h3,
+.theme-light h4,
+.theme-light h5,
+.theme-light h6 {
+  color: #0f172a !important;
+}
+
+.theme-light .text-white {
+  color: #0f172a !important;
+}
+
+.theme-light .text-surface-100,
+.theme-light .text-surface-200 {
+  color: #1e293b !important;
+}
+
+.theme-light .text-surface-300 {
+  color: #475569 !important;
+}
+
+.theme-light .text-surface-400 {
+  color: #64748b !important;
+}
+
+.theme-light .text-brand-300,
+.theme-light .text-brand-400 {
+  color: #0c6db5 !important;
+}
+
+.theme-light .text-brand-200 {
+  color: #0c8de7 !important;
+}
+
+/* Retain white text inside prominent buttons and hero pills */
+.theme-light .btn-primary,
+.theme-light .btn-primary *,
+.theme-light .badge-brand,
+.theme-light .tag-badge {
+  color: #ffffff !important;
+}
+
+/* ----------------- FORM CONTROLS & INPUTS ----------------- */
+.theme-light .input-field-dark,
+.theme-light input[type="text"],
+.theme-light input[type="email"],
+.theme-light input[type="tel"],
+.theme-light input[type="number"],
+.theme-light input[type="search"],
+.theme-light textarea,
+.theme-light select {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+.theme-light input::placeholder,
+.theme-light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.theme-light input:focus,
+.theme-light textarea:focus,
+.theme-light select:focus {
+  border-color: #0c8de7 !important;
+  box-shadow: 0 0 0 4px rgba(12, 141, 231, 0.12) !important;
+}
+
+/* ----------------- MOBILE STICKY BOTTOM DOCK ----------------- */
+.theme-light .lg\:hidden.fixed.bottom-3 .bg-surface-950\/90 {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.15) !important;
+}
+
+.theme-light .lg\:hidden.fixed.bottom-3 .bg-white\/10 {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #334155 !important;
+}
+
+.theme-light .lg\:hidden.fixed.bottom-3 .bg-white\/10:hover {
+  background-color: #e2e8f0 !important;
+}
+
+/* ----------------- FOOTER IN LIGHT MODE ----------------- */
+.theme-light footer {
+  background-color: #070e1b !important;
+  color: #94a3b8 !important;
+}
+
+.theme-light footer .text-white {
+  color: #ffffff !important;
+}
+
+.theme-light footer a:hover {
+  color: #38bdf8 !important;
+}
+
+/* ----------------- LIGHT MODE HERO & DARK BANNER CONTRAST SAFEGUARDS ----------------- */
+.theme-light .page-hero,
+.theme-light .page-hero h1,
+.theme-light .page-hero p,
+.theme-light .page-hero .text-white,
+.theme-light .page-hero .text-surface-200,
+.theme-light #hero-section h1,
+.theme-light #hero-section p,
+.theme-light #hero-section .text-white,
+.theme-light #hero-section .text-surface-200,
+.theme-light #hero-section .font-outfit,
+.theme-light .cta-gradient-card,
+.theme-light .cta-gradient-card h2,
+.theme-light .cta-gradient-card p,
+.theme-light .cta-gradient-card .text-white {
+  color: #ffffff !important;
+}
+
+/* Ensure clean light backgrounds for middle sections with dark gradients */
+.theme-light #services-carousel-section > .absolute.inset-0.bg-gradient-to-b,
+.theme-light #home-offers-section > .absolute.inset-0.bg-gradient-to-b {
+  display: none !important;
+}
+.theme-light #services-carousel-section .from-\[\#020617\],
+.theme-light #home-offers-section .from-\[\#020617\] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ==========================================================================
+   STS EXECUTIVE COMMAND CENTER — NEO-CLASSICAL DIGITAL THEME
+   Bridging Timeless Classical Horological Luxury with Modern Digital Precision
+   ========================================================================== */
+
+/* --- 1. Architectural Canvas & Atmosphere --- */
+.admin-theme-dark .admin-dark-canvas {
+  display: block !important;
+}
+.admin-theme-dark .admin-light-canvas {
+  display: none !important;
+}
+.admin-theme-light .admin-dark-canvas {
+  display: none !important;
+}
+.admin-theme-light .admin-light-canvas {
+  display: block !important;
+}
+
+.admin-grid-matrix {
+  background-image: 
+    radial-gradient(rgba(12, 141, 231, 0.18) 1px, transparent 1px),
+    radial-gradient(rgba(212, 175, 55, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px, 96px 96px;
+  background-position: 0 0, 16px 16px;
+}
+
+.admin-grid-matrix-light {
+  background-image: 
+    radial-gradient(rgba(12, 141, 231, 0.12) 1px, transparent 1px),
+    radial-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px, 64px 64px;
+}
+
+/* --- 2. Executive Containers & Cards --- */
+.admin-card-executive {
+  position: relative;
+  border-radius: 1.25rem;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.admin-theme-dark .admin-card-executive {
+  background: linear-gradient(135deg, rgba(14, 25, 45, 0.55) 0%, rgba(7, 14, 28, 0.70) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 
+    0 10px 32px 0 rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(24px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+}
+
+.admin-theme-dark .admin-card-executive:hover {
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  background: linear-gradient(135deg, rgba(18, 32, 58, 0.65) 0%, rgba(9, 18, 36, 0.80) 100%) !important;
+  box-shadow: 
+    0 18px 45px -8px rgba(0, 0, 0, 0.55),
+    0 0 25px -4px rgba(12, 141, 231, 0.35),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-3px);
+}
+
+.admin-theme-light .admin-card-executive {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.76) 0%, rgba(248, 250, 252, 0.64) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 
+    0 10px 30px 0 rgba(15, 23, 42, 0.06),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+}
+
+.admin-theme-light .admin-card-executive:hover {
+  border-color: rgba(12, 141, 231, 0.4) !important;
+  box-shadow: 
+    0 14px 35px 0 rgba(12, 141, 231, 0.12),
+    inset 0 1px 2px rgba(255, 255, 255, 1) !important;
+  transform: translateY(-3px);
+}
+
+/* --- Luxury Tinted Frosted Glass Modifiers --- */
+.admin-theme-dark .glass-sapphire {
+  background: linear-gradient(135deg, rgba(14, 38, 75, 0.55) 0%, rgba(7, 14, 28, 0.70) 100%) !important;
+  border-color: rgba(56, 189, 248, 0.32) !important;
+}
+.admin-theme-dark .glass-sapphire:hover {
+  border-color: rgba(56, 189, 248, 0.6) !important;
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.55), 0 0 25px -4px rgba(12, 141, 231, 0.4), inset 0 1px 2px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+.admin-theme-dark .glass-gold {
+  background: linear-gradient(135deg, rgba(55, 40, 10, 0.55) 0%, rgba(18, 14, 6, 0.70) 100%) !important;
+  border-color: rgba(245, 158, 11, 0.35) !important;
+}
+.admin-theme-dark .glass-gold:hover {
+  border-color: rgba(245, 158, 11, 0.65) !important;
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.55), 0 0 25px -4px rgba(245, 158, 11, 0.4), inset 0 1px 2px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+.admin-theme-dark .glass-amethyst {
+  background: linear-gradient(135deg, rgba(42, 22, 75, 0.55) 0%, rgba(12, 8, 28, 0.70) 100%) !important;
+  border-color: rgba(168, 85, 247, 0.32) !important;
+}
+.admin-theme-dark .glass-amethyst:hover {
+  border-color: rgba(168, 85, 247, 0.65) !important;
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.55), 0 0 25px -4px rgba(168, 85, 247, 0.4), inset 0 1px 2px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+.admin-theme-dark .glass-emerald {
+  background: linear-gradient(135deg, rgba(12, 50, 36, 0.55) 0%, rgba(6, 20, 15, 0.70) 100%) !important;
+  border-color: rgba(16, 185, 129, 0.32) !important;
+}
+.admin-theme-dark .glass-emerald:hover {
+  border-color: rgba(16, 185, 129, 0.65) !important;
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.55), 0 0 25px -4px rgba(16, 185, 129, 0.4), inset 0 1px 2px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Light Mode Tinted Crystal Glass */
+.admin-theme-light .glass-sapphire {
+  background: linear-gradient(135deg, rgba(235, 245, 255, 0.75) 0%, rgba(255, 255, 255, 0.65) 100%) !important;
+  border-color: rgba(186, 230, 253, 0.9) !important;
+}
+.admin-theme-light .glass-gold {
+  background: linear-gradient(135deg, rgba(255, 251, 235, 0.75) 0%, rgba(255, 255, 255, 0.65) 100%) !important;
+  border-color: rgba(253, 230, 138, 0.9) !important;
+}
+.admin-theme-light .glass-amethyst {
+  background: linear-gradient(135deg, rgba(245, 243, 255, 0.75) 0%, rgba(255, 255, 255, 0.65) 100%) !important;
+  border-color: rgba(221, 214, 254, 0.9) !important;
+}
+.admin-theme-light .glass-emerald {
+  background: linear-gradient(135deg, rgba(236, 253, 245, 0.75) 0%, rgba(255, 255, 255, 0.65) 100%) !important;
+  border-color: rgba(167, 243, 208, 0.9) !important;
+}
+
+/* Subtle classical beveled edge header for cards */
+.admin-card-header {
+  position: relative;
+}
+.admin-card-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+.admin-theme-light .admin-card-header::after {
+  background: linear-gradient(90deg, transparent, rgba(226,232,240,0.8), transparent);
+}
+
+/* --- 3. Classical Jewel Icon Framing --- */
+.admin-icon-halo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-icon-halo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.25), transparent 70%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.admin-theme-dark .admin-icon-halo-sapphire {
+  background: radial-gradient(circle at 30% 30%, rgba(12, 141, 231, 0.25), rgba(12, 141, 231, 0.08));
+  border: 1px solid rgba(12, 141, 231, 0.35);
+  color: #38bdf8;
+  box-shadow: 0 0 20px -4px rgba(12, 141, 231, 0.3);
+}
+.admin-theme-light .admin-icon-halo-sapphire {
+  background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+  border: 1px solid #7dd3fc;
+  color: #0284c7;
+  box-shadow: 0 4px 12px -2px rgba(2, 132, 199, 0.2);
+}
+
+.admin-theme-dark .admin-icon-halo-gold {
+  background: radial-gradient(circle at 30% 30%, rgba(245, 158, 11, 0.25), rgba(212, 175, 55, 0.08));
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
+  box-shadow: 0 0 20px -4px rgba(245, 158, 11, 0.25);
+}
+.admin-theme-light .admin-icon-halo-gold {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 1px solid #fcd34d;
+  color: #b45309;
+  box-shadow: 0 4px 12px -2px rgba(180, 83, 9, 0.2);
+}
+
+.admin-theme-dark .admin-icon-halo-indigo {
+  background: radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.25), rgba(99, 102, 241, 0.08));
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  color: #a5b4fc;
+  box-shadow: 0 0 20px -4px rgba(99, 102, 241, 0.3);
+}
+.admin-theme-light .admin-icon-halo-indigo {
+  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+  border: 1px solid #a5b4fc;
+  color: #4f46e5;
+  box-shadow: 0 4px 12px -2px rgba(79, 70, 229, 0.2);
+}
+
+.admin-theme-dark .admin-icon-halo-emerald {
+  background: radial-gradient(circle at 30% 30%, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.08));
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  box-shadow: 0 0 20px -4px rgba(16, 185, 129, 0.3);
+}
+.admin-theme-light .admin-icon-halo-emerald {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+  border: 1px solid #6ee7b7;
+  color: #059669;
+  box-shadow: 0 4px 12px -2px rgba(5, 150, 105, 0.2);
+}
+
+.group:hover .admin-icon-halo {
+  transform: scale(1.08) rotate(2deg);
+}
+
+/* --- 4. Sidebar & Header Theming --- */
+.admin-theme-dark .admin-sidebar {
+  background: rgba(7, 13, 24, 0.96) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.admin-theme-light .admin-sidebar {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+}
+
+.admin-theme-dark .admin-top-header {
+  background: rgba(7, 13, 24, 0.88) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.admin-theme-light .admin-top-header {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+}
+
+/* Active navigation item with classical gold/sapphire accent line */
+.admin-nav-item {
+  position: relative;
+  transition: all 0.25s ease;
+  font-weight: 600;
+}
+
+.admin-theme-dark .admin-nav-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+.admin-theme-light .admin-nav-item:hover {
+  background: rgba(12, 141, 231, 0.06);
+  color: #0284c7;
+}
+
+.admin-theme-dark .admin-nav-item.active {
+  background: linear-gradient(90deg, rgba(12, 141, 231, 0.18), rgba(12, 141, 231, 0.05));
+  border: 1px solid rgba(12, 141, 231, 0.35);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 2px 10px -2px rgba(12, 141, 231, 0.2);
+}
+.admin-theme-light .admin-nav-item.active {
+  background: linear-gradient(90deg, rgba(12, 141, 231, 0.12), rgba(12, 141, 231, 0.04));
+  border: 1px solid rgba(12, 141, 231, 0.4);
+  color: #0284c7;
+  font-weight: 700;
+  box-shadow: 0 2px 8px -1px rgba(12, 141, 231, 0.15);
+}
+
+/* Side indicator bar */
+.admin-nav-item.active::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  bottom: 15%;
+  width: 3.5px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #38bdf8, #d4af37);
+}
+[dir="rtl"] .admin-nav-item.active::before {
+  right: 0;
+}
+[dir="ltr"] .admin-nav-item.active::before {
+  left: 0;
+}
+
+/* --- 5. Executive Table Styling --- */
+.admin-table-row {
+  transition: all 0.2s ease;
+}
+.admin-theme-dark .admin-table-row:hover {
+  background-color: rgba(12, 141, 231, 0.08) !important;
+}
+.admin-theme-light .admin-table-row:hover {
+  background-color: rgba(241, 245, 249, 0.8) !important;
+}
+
+/* --- 6. Seamless Compatibility with existing Admin Blade templates --- */
+.admin-theme-dark .card-light {
+  background: linear-gradient(145deg, rgba(10, 22, 42, 0.92) 0%, rgba(6, 14, 28, 0.98) 100%) !important;
+  border-color: rgba(12, 141, 231, 0.25) !important;
+  color: #f0f9ff !important;
+  box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.45), 0 0 20px -5px rgba(12, 141, 231, 0.12) !important;
+}
+.admin-theme-dark .text-surface-900 {
+  color: #ffffff !important;
+}
+.admin-theme-dark .text-surface-800 {
+  color: #f8fafc !important;
+}
+.admin-theme-dark .text-surface-700 {
+  color: #e0f2fe !important;
+}
+.admin-theme-dark .text-surface-500,
+.admin-theme-dark .text-surface-400 {
+  color: #bae6fd !important;
+}
+
+/* Global eradication of dull gray in dark admin mode */
+.admin-theme-dark .text-slate-400,
+.admin-theme-dark .text-gray-400,
+.admin-theme-dark .text-zinc-400 {
+  color: #93c5fd !important;
+}
+.admin-theme-dark .text-slate-300,
+.admin-theme-dark .text-gray-300,
+.admin-theme-dark .text-zinc-300 {
+  color: #cce3fd !important;
+}
+.admin-theme-dark .text-slate-200,
+.admin-theme-dark .text-gray-200 {
+  color: #e8f3fe !important;
+}
+
+.admin-theme-dark .bg-surface-50 {
+  background-color: rgba(12, 28, 54, 0.7) !important;
+  border-color: rgba(12, 141, 231, 0.25) !important;
+  color: #ffffff !important;
+}
+.admin-theme-dark .bg-surface-100 {
+  background-color: rgba(12, 141, 231, 0.12) !important;
+}
+.admin-theme-dark .border-surface-100,
+.admin-theme-dark .border-surface-200 {
+  border-color: rgba(12, 141, 231, 0.2) !important;
+}
+
+/* Form inputs contrast in admin */
+.admin-theme-dark input,
+.admin-theme-dark select,
+.admin-theme-dark textarea {
+  background-color: rgba(10, 22, 40, 0.85) !important;
+  border-color: rgba(12, 141, 231, 0.3) !important;
+  color: #ffffff !important;
+}
+.admin-theme-dark input:focus,
+.admin-theme-dark select:focus,
+.admin-theme-dark textarea:focus {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 0 3px rgba(12, 141, 231, 0.25) !important;
+}
+.admin-theme-dark input::placeholder,
+.admin-theme-dark textarea::placeholder {
+  color: #7dd3fc !important;
+  opacity: 0.65;
+}
+
+/* Light mode overrides for existing card-light templates */
+.admin-theme-light .header-title,
+.admin-theme-light .sidebar-brand-title,
+.admin-theme-light .sidebar-user-name {
+  color: #0c4a6e !important;
+}
+.admin-theme-light .sidebar-nav-link:not(.active) {
+  color: #0369a1 !important;
+}
+.admin-theme-light .sidebar-nav-link:not(.active):hover {
+  background: rgba(12, 141, 231, 0.08) !important;
+  color: #0284c7 !important;
+}
+.admin-theme-light .sidebar-user-card {
+  background: #f0f9ff !important;
+  border-color: #bae6fd !important;
+}
+.admin-theme-light .sidebar-user-email {
+  color: #0284c7 !important;
+}
+.admin-theme-light .header-action-btn {
+  background: #ffffff !important;
+  border-color: #bae6fd !important;
+  color: #0369a1 !important;
+}
+.admin-theme-light .header-action-btn:hover {
+  background: #f0f9ff !important;
+  color: #0284c7 !important;
+  border-color: #7dd3fc !important;
+}
+
+/* ============================================================
+   SPRINGING POP-UP COUNTER EFFECT (Universal Numbers Animation)
+   ============================================================ */
+@keyframes counterPopSpring {
+  0% {
+    opacity: 0;
+    transform: scale(0.65) translateY(12px);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.15) translateY(-3px);
+    filter: blur(0);
+  }
+  80% {
+    transform: scale(0.96) translateY(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+.stat-pop-animated {
+  display: inline-block !important;
+  will-change: transform, opacity;
+  animation: counterPopSpring 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
+}
+
+.stat-counting {
+  text-shadow: 0 0 16px rgba(12, 141, 231, 0.45);
+}
+
+
+
+

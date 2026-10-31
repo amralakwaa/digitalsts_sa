@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Disallow admin area from crawlers
+Disallow: /admin/
+Disallow: /admin
+Disallow: /lang/
+Disallow: /quote
+Disallow: /contact
+
+# Allow public content
+Allow: /services/
+Allow: /projects/
+Allow: /articles/
+Allow: /offers/
+Allow: /about
+Allow: /sectors
+
+# Sitemap
+Sitemap: https://sts-sa.com/sitemap.xml
