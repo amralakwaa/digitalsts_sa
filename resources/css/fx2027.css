@@ -1,0 +1,300 @@
+/* ============================================================
+   STS 2027 — Motion & Aurora Layer
+   Additive design layer: aurora backdrop, spotlight glass cards,
+   gradient-border glow, floating pill navigation, split-text
+   reveals, magnetic buttons, page transitions.
+   All motion is disabled under prefers-reduced-motion.
+   ============================================================ */
+
+:root {
+  --fx-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --fx-cyan: #22d3ee;
+  --fx-blue: #0c8de7;
+  --fx-violet: #7c5cff;
+  --fx-mint: #2dd4bf;
+}
+
+/* ---------- Aurora backdrop (fixed, behind all sections) ---------- */
+body.theme-dark {
+  background:
+    radial-gradient(1200px 700px at 85% -10%, rgba(12, 141, 231, 0.20), transparent 60%),
+    radial-gradient(900px 600px at 5% 20%, rgba(124, 92, 255, 0.14), transparent 60%),
+    radial-gradient(1000px 700px at 50% 110%, rgba(34, 211, 238, 0.12), transparent 60%),
+    #010318;
+  background-attachment: fixed;
+}
+
+.fx-aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.fx-aurora i {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.45;
+  will-change: transform;
+}
+.fx-aurora i:nth-child(1) {
+  width: 46vw; height: 46vw; top: -12vw; right: -8vw;
+  background: radial-gradient(circle, var(--fx-blue), transparent 65%);
+  animation: fx-drift-a 22s ease-in-out infinite alternate;
+}
+.fx-aurora i:nth-child(2) {
+  width: 40vw; height: 40vw; top: 35vh; left: -12vw;
+  background: radial-gradient(circle, var(--fx-violet), transparent 65%);
+  opacity: 0.30;
+  animation: fx-drift-b 28s ease-in-out infinite alternate;
+}
+.fx-aurora i:nth-child(3) {
+  width: 36vw; height: 36vw; bottom: -14vw; right: 18vw;
+  background: radial-gradient(circle, var(--fx-cyan), transparent 65%);
+  opacity: 0.28;
+  animation: fx-drift-c 25s ease-in-out infinite alternate;
+}
+@keyframes fx-drift-a { to { transform: translate3d(-8vw, 10vh, 0) scale(1.15); } }
+@keyframes fx-drift-b { to { transform: translate3d(12vw, -8vh, 0) scale(1.2); } }
+@keyframes fx-drift-c { to { transform: translate3d(-10vw, -12vh, 0) scale(0.9); } }
+
+/* Film-grain + faint grid for depth */
+.fx-noise {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+body.theme-dark > header,
+body.theme-dark > main,
+body.theme-dark > footer { position: relative; z-index: 2; }
+body.theme-dark > header { position: fixed; z-index: 50; }
+
+/* Let the aurora show through the formerly solid dark sections */
+body.theme-dark main section.bg-surface-950,
+body.theme-dark main section.bg-surface-900,
+body.theme-dark main .bg-surface-950\/95 {
+  background-color: transparent !important;
+}
+body.theme-dark main section.border-t { border-color: rgba(255, 255, 255, 0.06) !important; }
+
+/* ---------- Floating pill navigation ---------- */
+body.theme-dark > header {
+  top: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(3, 7, 30, 0.55) !important;
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  box-shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform 0.5s var(--fx-ease), background 0.4s, box-shadow 0.4s;
+}
+body.theme-dark > header.nav-dark-scrolled {
+  background: rgba(3, 7, 30, 0.78) !important;
+  box-shadow: 0 18px 60px -14px rgba(12, 141, 231, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+body.theme-dark > header.fx-nav-hidden { transform: translateY(-140%); }
+@media (min-width: 1024px) {
+  body.theme-dark > header { left: 1.5rem; right: 1.5rem; }
+}
+body.theme-dark > main { padding-top: 6.25rem; }
+
+/* Animated hover underline for desktop links */
+body.theme-dark > header nav a { position: relative; }
+body.theme-dark > header nav a::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0.9rem;
+  bottom: 0.3rem;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--fx-cyan), var(--fx-blue));
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.45s var(--fx-ease);
+}
+body.theme-dark > header nav a:hover::after { transform: scaleX(1); }
+
+/* ---------- Scroll progress: gradient + glow ---------- */
+.scroll-progress {
+  background: linear-gradient(90deg, var(--fx-cyan), var(--fx-blue), var(--fx-violet)) !important;
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.7);
+  z-index: 100;
+}
+
+/* ---------- Spotlight glass cards + animated gradient border ---------- */
+.card-dark,
+.card-light,
+.hover-lift {
+  position: relative;
+  isolation: isolate;
+}
+.card-dark {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015)),
+    rgba(4, 8, 34, 0.72) !important;
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+.card-dark::before,
+.card-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s var(--fx-ease);
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(34, 211, 238, 0.16), transparent 45%);
+}
+.card-dark:hover::before,
+.card-light:hover::before { opacity: 1; }
+
+.card-dark::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s var(--fx-ease);
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(34, 211, 238, 0.9), rgba(124, 92, 255, 0.5) 40%, transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.card-dark:hover::after { opacity: 1; }
+
+/* 3D tilt (set by JS) */
+[data-fx-tilt] {
+  transform-style: preserve-3d;
+  transition: transform 0.35s var(--fx-ease);
+  will-change: transform;
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  background: linear-gradient(120deg, #0c6db5 0%, #0c8de7 40%, #22d3ee 100%) !important;
+  background-size: 200% 100% !important;
+  animation: fx-btn-flow 6s ease-in-out infinite alternate;
+  box-shadow: 0 8px 28px -6px rgba(12, 141, 231, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+@keyframes fx-btn-flow { to { background-position: 100% 0; } }
+.btn-primary:hover {
+  box-shadow: 0 14px 40px -6px rgba(34, 211, 238, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+}
+[data-fx-magnetic] { transition: transform 0.35s var(--fx-ease); will-change: transform; }
+.btn-ghost-dark { backdrop-filter: blur(14px); }
+
+/* ---------- Gradient text with moving sheen ---------- */
+.text-gradient-brand,
+main .text-brand-400.fx-sheen {
+  background-image: linear-gradient(100deg, #22d3ee 0%, #0c8de7 35%, #a78bfa 65%, #22d3ee 100%) !important;
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: fx-sheen 7s linear infinite;
+}
+@keyframes fx-sheen { to { background-position: 250% 0; } }
+
+/* ---------- Split-word headline reveal ---------- */
+.fx-split .fx-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.fx-split .fx-word > span {
+  display: inline-block;
+  transform: translateY(110%) rotate(3deg);
+  opacity: 0;
+  transition: transform 0.9s var(--fx-ease), opacity 0.9s var(--fx-ease);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+.fx-split.fx-in .fx-word > span { transform: none; opacity: 1; }
+
+/* ---------- Enhanced scroll reveal (extends existing .reveal*) ---------- */
+.reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-fade {
+  transition-duration: 0.9s !important;
+  transition-timing-function: var(--fx-ease) !important;
+}
+
+/* ---------- Image parallax + hover zoom ---------- */
+[data-fx-parallax] { will-change: transform; }
+main img { transition: transform 0.9s var(--fx-ease), opacity 0.3s; }
+.group:hover > img,
+.group:hover img.object-cover { transform: scale(1.06); }
+
+/* ---------- Cursor glow (desktop only) ---------- */
+.fx-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 520px; height: 520px;
+  margin: -260px 0 0 -260px;
+  border-radius: 9999px;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.10), rgba(12, 141, 231, 0.05) 40%, transparent 70%);
+  transform: translate3d(var(--cx, -999px), var(--cy, -999px), 0);
+  opacity: 0;
+  transition: opacity 0.5s;
+  will-change: transform;
+}
+.fx-cursor.on { opacity: 1; }
+@media (hover: none), (max-width: 1023px) { .fx-cursor { display: none; } }
+
+/* ---------- Page load curtain ---------- */
+.fx-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: #010318;
+  transition: opacity 0.7s var(--fx-ease), visibility 0.7s;
+}
+.fx-curtain.out { opacity: 0; visibility: hidden; }
+.fx-curtain .fx-ring {
+  width: 64px; height: 64px;
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-top-color: var(--fx-cyan);
+  border-right-color: var(--fx-blue);
+  animation: fx-spin 0.9s linear infinite;
+  box-shadow: 0 0 40px rgba(34, 211, 238, 0.35);
+}
+@keyframes fx-spin { to { transform: rotate(360deg); } }
+
+/* ---------- Floating decorative motion ---------- */
+.animate-float, .animate-float-delay { animation-duration: 7s; }
+
+/* ---------- Footer glow edge ---------- */
+body.theme-dark > footer {
+  background: linear-gradient(180deg, transparent, rgba(1, 3, 24, 0.85) 30%) !important;
+  border-top: 1px solid transparent !important;
+  border-image: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.5), rgba(124, 92, 255, 0.4), transparent) 1;
+}
+
+/* ---------- Selection + scrollbar polish ---------- */
+::selection { background: rgba(34, 211, 238, 0.35); color: #fff; }
+html { scrollbar-color: #0c8de7 #010318; scrollbar-width: thin; }
+
+/* ---------- Reduced motion: switch every effect off ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .fx-aurora i, .btn-primary, .text-gradient-brand, .fx-curtain .fx-ring { animation: none !important; }
+  .fx-split .fx-word > span { transform: none !important; opacity: 1 !important; transition: none !important; }
+  .fx-cursor { display: none; }
+  [data-fx-tilt], [data-fx-magnetic], [data-fx-parallax] { transform: none !important; }
+}
